@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -w
-PROG = terminal
+PROG = shell
 
-SRCS = bash.c
+SRCS = shell.c
 
 all: $(PROG)
 
