@@ -8,7 +8,8 @@
 #include <termios.h>
 #include <signal.h>
 #include <malloc.h>
-
+#include <limits.h>
+#include <pwd.h>
 //Structure for maintaining job names and their process ID along with their job number
 struct jobs
 {
@@ -83,7 +84,9 @@ char *user,*name,*cwd,*home,*home_rel;
 void PS1()
 {
 	gethostname(name,sizeof(name));	//getting host name
-	user=getlogin();		//getting username
+	struct passwd *pass;
+	pass = getpwuid(getuid());		//getting username
+	user =  pass->pw_name;
 	getcwd(cwd,1000);		//getting current working directory
 	if(strcmp(cwd,home)==0)
 		strcpy(cwd,"~");	//replacing cwd with ~ if it is home directory
